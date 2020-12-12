@@ -12,7 +12,7 @@ const MainDiv = styled.div`
 `
 
 const Image = styled.div`
-  background: center / cover no-repeat url(${GatheringMobileSmall})
+  background: center / cover no-repeat url(${GatheringMobileSmall});
   object-fit: cover;
   height: 20rem;
   width: 100%;
@@ -27,6 +27,7 @@ const TitleOption = styled.h3`
   margin: 1.4rem 0;
   position: relative;
   font-weight: 400;
+  cursor: pointer;
 
   &.active {
     color: #111111;

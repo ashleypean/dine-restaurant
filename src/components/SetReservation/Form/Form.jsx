@@ -1,29 +1,35 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
+import axios from 'axios'
+import formErrorHandling from './FormHandling'
 import Plus from '../../../images/icons/icon-plus.svg'
 import Minus from '../../../images/icons/icon-minus.svg'
 
 const MainDiv = styled.div`
-background: white;
-display: flex;
-justify-content: center;
-align-items: center;
-flex-direction: column;
-text-align: center;
-padding: 2rem 1rem;
+  background: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  text-align: center;
+  padding: 2rem 1rem;
+  margin: -5rem 0 0;
+  z-index: 2;
 `
 const Reservation = styled.form`
   display: flex;
   flex-direction: column;
   width: 80%;
-  border: 1px solid red;
   padding: 1rem .5rem;
-  z-index: 2;
+  z-index: 3;
+  background: white;
+  box-shadow: 0px 1px 5px 3px rgba(50, 50, 50, 0.75);
 `
 const TextInput = styled.input`
   border: none;
   border-bottom: 1px solid gray;
   margin: .8rem 0;
+  outline: none;
 `
 const FormLabel = styled.label`
   text-align: left;
@@ -48,6 +54,7 @@ const DateTimeInput = styled.input`
   background: transparent;
   width: 28%;
   text-align: center;
+  outline: none;
 `
 
 const TimeSelect = styled.select`
@@ -98,6 +105,12 @@ const Reserve = styled.button`
   margin: 1rem 0;
 `
 
+const Error = styled.p`
+  color: red;
+  font-size: .6rem;
+  margin: 0;
+`
+
 export default function Form() {
   const [personCount, setPersonCount] = useState(0)
 
@@ -109,37 +122,61 @@ export default function Form() {
     }else if(bClass.includes('plus') && personCount < 50) {
       setPersonCount(prevCount => prevCount+=1)
     }
-
   }
+
+  const handleSubmit=(e)=> {
+    e.preventDefault()
+    const formData = e.target
+    const entries = {
+      name: formData[0].value, 
+      email: formData[1].value, 
+      day: formData[2].value, 
+      month: formData[3].value, 
+      year: formData[4].value, 
+      hour: formData[5].value, 
+      minute: formData[6].value, 
+      timeOfDay: formData[7].value, 
+      partyCount: personCount
+    }
+
+    //Post form info if it passes validation, reject if not 
+    if(formErrorHandling(entries) === true) {
+
+    }
+  }
+
   return (
     <MainDiv>
-      <Reservation>
-        <TextInput placeholder='Name'/>
-        <TextInput placeholder='Email'/>
+      <Reservation onSubmit={handleSubmit}>
+        <TextInput type='text' placeholder='Name' name='name'/>
+        <TextInput type='email 'placeholder='Email'name='email'/>
 
         <FormLabel>Pick a date</FormLabel>
         <FormContainer>
-          <DateTimeInput placeholder='MM' />
-          <DateTimeInput placeholder='DD' />
-          <DateTimeInput placeholder='YYYY' />
+          <DateTimeInput type='number' placeholder='MM' name='month'/>
+          <DateTimeInput type='number' placeholder='DD' name='day'/>
+          <DateTimeInput type='number' placeholder='YYYY' name='year'/>
         </FormContainer>
 
         <FormLabel>Pick a time</FormLabel>
         <FormContainer>
-          <DateTimeInput placeholder='00'/>
-          <DateTimeInput placeholder='00'/>
+          <DateTimeInput type='number' placeholder='00' name='hour' />
+          <DateTimeInput placeholder='00' name='minute' />
           <TimeSelect>
-            <option>AM</option>
-            <option>PM</option>
+            <option name='am'>AM</option>
+            <option name='pm'>PM</option>
           </TimeSelect>
         </FormContainer>
 
         <RangeContainer extend={true}>
           <RangeButton onClick={handleClick} className='minus' />
-          <NumberCount>{personCount + ' people'}</NumberCount>
+          <NumberCount name='people' className='partyCount'>
+            {personCount} <span>people</span>
+          </NumberCount>
           <RangeButton onClick={handleClick} className='plus' />
         </RangeContainer>
         <Reserve>MAKE RESERVATION</Reserve>
+        <Error>Error goes here</Error>
       </Reservation>
     </MainDiv>
   )

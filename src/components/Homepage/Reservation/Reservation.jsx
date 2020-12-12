@@ -1,4 +1,5 @@
 import React from 'react'
+import { useHistory } from 'react-router-dom'
 import styled from 'styled-components'
 import ReservationMobileSmall from '../../../images/homepage/ready-bg-mobile.jpg'
 
@@ -29,10 +30,19 @@ const BookButton = styled.button`
 `
 
 export default function Reservation() {
+  const history = useHistory()
+
+  const handleClick = (e) => {
+    history.push('/book-a-table')
+  }
+
+
   return (
     <MainDiv>
       <Title>Ready to make a reservation?</Title>
-      <BookButton>BOOK A TABLE</BookButton>
+      <BookButton onClick={handleClick}>
+        BOOK A TABLE
+      </BookButton>
     </MainDiv>
   )
 }

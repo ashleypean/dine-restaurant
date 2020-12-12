@@ -4,7 +4,7 @@ import GatheringMobileSmall from '../../../images/homepage/family-gathering-mobi
 
 const MainDiv = styled.div`
   background: white;
-  padding: 2rem 1rem 3rem;
+  padding: 2rem 1rem 4rem;
   text-align: center;
   display: flex;
   flex-direction: column;
@@ -77,20 +77,17 @@ export default function Gathering() {
   return (
     <MainDiv>
       <Image />
-      <div>
-        <TitleOption className="active">FAMILY GATHERING</TitleOption>
+      <TitleOption className="active">FAMILY GATHERING</TitleOption>
 
-        <TitleOption>SPECIAL EVENTS</TitleOption>
-        <TitleOption>SOCIAL EVENTS</TitleOption>
+      <TitleOption>SPECIAL EVENTS</TitleOption>
+      <TitleOption>SOCIAL EVENTS</TitleOption>
 
-        <Title>Family Gathering</Title>
-        <Description>
-          We love catering for entire families. So please bring everyone along for a special meal with your loved ones. We’ll provide a memorable experience for all.
-        </Description>
+      <Title>Family Gathering</Title>
+      <Description>
+        We love catering for entire families. So please bring everyone along for a special meal with your loved ones. We’ll provide a memorable experience for all.
+      </Description>
 
-        <BookButton>BOOK A TABLE</BookButton>
-      </div>
-
+      <BookButton>BOOK A TABLE</BookButton>
     </MainDiv>
   )
 }

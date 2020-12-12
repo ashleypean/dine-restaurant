@@ -1,4 +1,5 @@
 import React from 'react'
+import { useHistory } from 'react-router-dom'
 import styled from 'styled-components'
 import mobileSmall from '../../../images/homepage/hero-bg-mobile.jpg'
 import mobile2x from '../../../images/homepage/hero-bg-mobile@2x.jpg'
@@ -12,7 +13,6 @@ const HeaderDiv = styled.div`
   background: top / cover no-repeat url(${mobileSmall});
   width: calc(100% - 2rem);
   color: white;
-  padding: 2rem 0;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -47,6 +47,11 @@ const BookingButton = styled.button`
 `
 
 export default function Header() {
+  const history = useHistory()
+
+  const handleClick = (e) => {
+    history.push('/book-a-table')
+  }
   return (
     <HeaderDiv className="header">
       <Title>dine</Title>
@@ -54,7 +59,9 @@ export default function Header() {
       <Description> 
          Experience our seasonal menu in beautiful country surroundings. Eat the freshest produce from the comfort of our farmhouse.
       </Description>
-      <BookingButton>BOOK A TABLE</BookingButton>
+      <BookingButton onClick={handleClick}>
+        BOOK A TABLE
+      </BookingButton>
     </HeaderDiv>
   )
 }

@@ -12,7 +12,7 @@ const MainDiv = styled.div`
   align-items: center;
   flex-direction: column;
   text-align: center;
-  padding: 2rem 1rem;
+  padding: 2rem 1rem 4rem;
   margin: -5rem 0 0;
   z-index: 2;
 `
@@ -26,10 +26,12 @@ const Reservation = styled.form`
   box-shadow: 0px 1px 5px 3px rgba(50, 50, 50, 0.75);
 `
 const TextInput = styled.input`
+  background: transparent;
   border: none;
   border-bottom: 1px solid gray;
-  margin: .8rem 0;
+  margin: .5rem 0;
   outline: none;
+  padding: .8rem;
 `
 const FormLabel = styled.label`
   text-align: left;
@@ -98,7 +100,8 @@ const Reserve = styled.button`
   color: white;
   background: black;
   border: none;
-  padding: .5rem 2rem;
+  height: 3rem;
+  padding: .8rem 2rem;
   font-size: .6rem;
   letter-spacing: .2rem;
   outline: none;
@@ -125,24 +128,27 @@ export default function Form() {
   }
 
   const handleSubmit=(e)=> {
+    console.log('submit')
     e.preventDefault()
     const formData = e.target
     const entries = {
       name: formData[0].value, 
       email: formData[1].value, 
-      day: formData[2].value, 
-      month: formData[3].value, 
-      year: formData[4].value, 
-      hour: formData[5].value, 
-      minute: formData[6].value, 
+      day: Number(formData[3].value), 
+      month: Number(formData[2].value), 
+      year: Number(formData[4].value), 
+      hour: Number(formData[5].value), 
+      minute: Number(formData[6].value), 
       timeOfDay: formData[7].value, 
       partyCount: personCount
     }
 
     //Post form info if it passes validation, reject if not 
     if(formErrorHandling(entries) === true) {
+      axios.post('/book-a-table', entries)
 
-    }
+      console.log('verified')
+    }else {console.log('not verified')}
   }
 
   return (
@@ -171,7 +177,7 @@ export default function Form() {
         <RangeContainer extend={true}>
           <RangeButton onClick={handleClick} className='minus' />
           <NumberCount name='people' className='partyCount'>
-            {personCount} <span>people</span>
+            {personCount === 1? personCount + ' person': personCount + ' people'} 
           </NumberCount>
           <RangeButton onClick={handleClick} className='plus' />
         </RangeContainer>

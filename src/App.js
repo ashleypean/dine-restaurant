@@ -8,6 +8,8 @@ const MainApp = styled.div`
   display: flex;
   width: 100%; 
   height: 100%;
+  margin: 0;
+  padding: 0;
 `
 
 function App() {
@@ -15,8 +17,8 @@ function App() {
     <MainApp>
       <Router>
         <Switch>
-          <Route path="/" component={HomePage}/>
-          <Route path="/reserve" component={ReservationPage}/>
+          <Route exact path="/" component={HomePage}/>
+          <Route path="/book-a-table" component={ReservationPage}/>
           <Route />
         </Switch>
       </Router>

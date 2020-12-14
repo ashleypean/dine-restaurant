@@ -12,24 +12,26 @@ const MainDiv = styled.div`
   align-items: center;
   flex-direction: column;
   text-align: center;
-  padding: 2rem 1rem 4rem;
-  margin: -5rem 0 0;
+  height: 35rem;
+  margin: 0 auto 0;
   z-index: 2;
+  max-width: 600px;
 `
 const Reservation = styled.form`
   display: flex;
   flex-direction: column;
   width: 80%;
-  padding: 1rem .5rem;
-  z-index: 3;
+  padding: 1rem 1rem;
   background: white;
+  margin-top: -10rem;
+  z-index: 2;
   box-shadow: 0px 1px 5px 3px rgba(50, 50, 50, 0.75);
 `
 const TextInput = styled.input`
   background: transparent;
   border: none;
   border-bottom: 1px solid gray;
-  margin: .5rem 0;
+  margin: .5rem;
   outline: none;
   padding: .8rem;
 `
@@ -37,14 +39,15 @@ const FormLabel = styled.label`
   text-align: left;
   color: gray;
   font-size: .6rem;
-  margin: .5rem 0;
+  margin: .5rem .5rem 0;
 `
 
 const FormContainer = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: center;
+  justify-content: space-evenly;
+  margin: 0 0 .8rem; 
   gap: .2rem;
   border-bottom: ${props => props.extend? '1px solid black': 'none'}
 `
@@ -54,26 +57,24 @@ const DateTimeInput = styled.input`
   border: none;
   border-bottom: 1px solid black;
   background: transparent;
-  width: 28%;
+  width: 25%;
   text-align: center;
   outline: none;
+  padding: .8rem 0;
 `
 
 const TimeSelect = styled.select`
   border: none;
   border-bottom: 1px solid black;
-  width: 28%;
-  width: 28%;
+  width: 20%;
   outline: none;
-
-  &::-webkit-ms-expand {
-    display: none;
-    color: gold;
-  }
+  padding: .7rem 0;
+  font-size: 1rem;
 `
 
 const RangeContainer = styled.div`
   padding: 0 .5rem;
+  margin: .5rem .8rem;
   display: flex;
   flex-direction: row;
   align-items: center;
